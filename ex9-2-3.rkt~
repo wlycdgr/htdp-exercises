@@ -1,0 +1,16 @@
+;; The first three lines of this file were inserted by DrRacket. They record metadata
+;; about the language level of this file in a form that our tools can easily process.
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname ex9-2-3) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
+; 9.2.2
+; do all lists of 2 symbols also belong to the class list-of-symbols?
+; provide a concise argument
+
+; every list of 2 symbols consists of a symbol
+; and an element that consists of a symbol and empty
+; empty is a list-of-symbols by part 1 of the definition
+; a symbol and a list-of-symbols is a list-of-symbols by part 2 of the definition
+; therefore, the element is a list-of-symbols
+; therefore, the list of 2 symbols is a list-of-symbols by part 2 of the definition
+
+; ^ CORRECT
+

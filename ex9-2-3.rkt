@@ -1,0 +1,12 @@
+;; The first three lines of this file were inserted by DrRacket. They record metadata
+;; about the language level of this file in a form that our tools can easily process.
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname ex9-2-3) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
+; 9.2.3
+; provide a data definition for the class of list of booleans
+
+; a list-of-booleans is:
+; 1. the empty list, empty, or
+; 2. a list constructed with cons where first is a boolean and rest is a list-of-booleans
+
+; another way of expressing #2:
+; (cons b lob), where b is a boolean and lob is a list-of-booleans
