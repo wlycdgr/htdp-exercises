@@ -1,0 +1,84 @@
+;; The first three lines of this file were inserted by DrRacket. They record metadata
+;; about the language level of this file in a form that our tools can easily process.
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname ex4-4-2) (read-case-sensitive #t) (teachpacks ((lib "convert.rkt" "teachpack" "htdp"))) (htdp-settings #(#t constructor repeating-decimal #f #t none #f ((lib "convert.rkt" "teachpack" "htdp")) #f)))
+;; tax : number -> number
+;; to compute the amount of tax owed given the gross pay
+
+;; data analysis
+;; we have three distinct situations:
+;; the pay is <= $240, and the tax is then 0%
+;; the pay is over $240 and less than or equal to $480, and the tax is then 15%
+;; the pay is over $480, and the tax is then 28%
+
+;; examples, including boundaries
+;; $0 pay -> 0% tax rate, $0 tax
+;; $100 pay -> 0% tax rate, $0 tax
+;; $240 pay -> 0% tax rate, $0 tax
+;; $250 pay -> 15% tax rate, $37.50 tax
+;; $480 pay -> 15% tax rate, $72 tax
+;; $500 pay -> 28% tax rate, $140 tax
+
+;; first definition draft: structure
+;; one conditional line for each of the three cases
+;(define (tax gross-pay)
+;  (cond
+;    [... ...]
+;    [... ...]
+;    [... ...]))
+
+;; second definition draft: conditions
+;(define (tax gross-pay)
+;  (cond
+;    [(<= gross-pay 240) ...]
+;    [(<= gross-pay 480) ...]
+;    [else ...]))
+
+;; third and final definition: answers (and any simplification)
+(define (tax gross-pay)
+  (cond
+    [(<= gross-pay 240) 0]
+    [(<= gross-pay 480) (* gross-pay 0.15)]
+    [else (* gross-pay 0.28)]))
+
+;; convert examples to tests,
+;; implementing tests as boolean assertions since this is possible here
+(= (tax 0) 0)
+(= (tax 100) 0)
+(= (tax 240) 0)
+(= (tax 250) 37.50)
+(= (tax 480) 72)
+(= (tax 500) 140)
+
+;; now let us also develop netpay
+;; this involves developing a helper function, grosspay, as well
+
+;; grosspay : number -> number
+;; to determine the gross pay of an employee from the number of hours worked
+;; we are told to assume that the hourly rate is $12
+(define (grosspay hours)
+  (* hours 12))
+
+(= (grosspay 0) 0)
+(= (grosspay 1) 12)
+(= (grosspay 10) 120)
+(= (grosspay 20) 240)
+(= (grosspay 30) 360)
+(= (grosspay 40) 480)
+(= (grosspay 50) 600)
+
+;; netpay : number -> number
+;; to determine the net pay of an employee from the number of hours worked
+;; the net pay is defined as the gross pay minux the tax
+(define (netpay hours)
+  (- (grosspay hours) (tax (grosspay hours))))
+
+(= (netpay 0) 0)
+(= (netpay 1) 12)
+(= (netpay 10) 120)
+(= (netpay 20) 240)
+(= (netpay 30) 306)
+(= (netpay 40) 408)
+(= (netpay 50) 432)
+
+
+

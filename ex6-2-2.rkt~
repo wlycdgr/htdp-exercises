@@ -1,0 +1,96 @@
+;; The first three lines of this file were inserted by DrRacket. They record metadata
+;; about the language level of this file in a form that our tools can easily process.
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname ex6-2-2) (read-case-sensitive #t) (teachpacks ((lib "draw.rkt" "teachpack" "htdp"))) (htdp-settings #(#t constructor repeating-decimal #f #t none #f ((lib "draw.rkt" "teachpack" "htdp")) #f)))
+;; we have defined a function for computing the distance of a point from the origin
+(define (distance-to-0 a-posn)
+  (sqrt
+   (+ (sqr (posn-x a-posn))
+      (sqr (posn-y a-posn)))))
+
+;; now let's evaluate some expressions by hand
+;; 1. (distance-to-0 (make-posn 3 4))
+;(sqrt
+; (+ (sqr (posn-x (make-posn 3 4)))
+;    (sqr (posn-y (make-posn 3 4)))))
+;->
+;(sqrt
+; (+ (sqr 3)
+;    (sqr (posn-y (make-posn 3 4)))))
+;->
+;(sqrt
+; (+ 9
+;    (sqr (posn-y (make-posn 3 4)))))
+;->
+;(sqrt
+; (+ 9
+;    (sqr 4)))
+;->
+;(sqrt
+; (+ 9
+;    16))
+;->
+;(sqrt 25) -> 5
+
+;; let's verify with the automated stepper....
+;; (distance-to-0 (make-posn 3 4))
+;; looks good!
+
+;; ok, another one.
+;; 2. (distance-to-0 (make-posn (* 2 3) (* 2 4)))
+;->
+;(distance-to-0 (make-posn 6 (* 2 4)))
+;->
+;(distance-to-0 (make-posn 6 8))
+;->
+;(sqrt
+; (+ (sqr (posn-x (make-posn 6 8)))
+;    (sqr (posn-y (make-posn 6 8)))))
+;->
+;(sqrt
+; (+ (sqr 6)
+;    (sqr (posn-y (make-posn 6 8)))))
+;->
+;(sqrt
+; (+ 36
+;    (sqr (posn-y (make-posn 6 8)))))
+;->
+;(sqrt
+; (+ 36
+;    (sqr 8)))
+;->
+;(sqrt (+ 36 64))
+;->
+;(sqrt 100) -> 10
+
+;; let's check with the autostepper again....
+;; (distance-to-0 (make-posn (* 2 3) (* 2 4)))
+;; that's correct. the argument is simplified before being passed into the function
+
+;; ok, last one
+;; 3. (distance-to-0 (make-posn 12 (- 6 1)))
+;->
+;(distance-to-0 (make-posn 12 5))
+;->
+;(sqrt
+; (+ (sqr (posn-x (make-posn 12 5)))
+;    (sqr (posn-y (make-posn 12 5)))))
+;->
+;(sqrt
+; (+ (sqr 12)
+;    (sqr (posn-y (make-posn 12 5)))))
+;->
+;(sqrt
+; (+ 144
+;    (sqr (posn-y (make-posn 12 5)))))
+;->
+;(sqrt
+; (+ 144
+;    (sqr 5)))
+;->
+;(sqrt
+; (+ 144 25))
+;-> (sqrt 169) -> 13
+
+;; let's check this bad boy with the auto stepper
+;; (distance-to-0 (make-posn 12 (- 6 1)))
+;; aaaaand, this one looks good too. done!

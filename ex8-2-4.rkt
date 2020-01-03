@@ -1,0 +1,25 @@
+;; The first three lines of this file were inserted by DrRacket. They record metadata
+;; about the language level of this file in a form that our tools can easily process.
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname ex8-2-4) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
+;; 8.2.4
+;; 1. (define (f x) 'x)
+;; Legal
+;; You've got define right after the opening left parenthesis
+;; Then you've got 2+ variables inside a set of parens
+;; Then you've got a valid expression - a bare constant is one
+;; Then you've got your required closing right paren
+;; So, you've got everything you need, and nothing that's not allowed
+
+;; 2. (define (f 'x) x)
+;; Illegal
+;; Mostly fine BUT the parens after the define contain a symbol constant
+;; Only variables are allowed there
+
+;; 3. (define (f x y) (+ 'y (not x)))
+;; Legal
+;; You've got the opening left paren,
+;; The define keyword right after it,
+;; The 2+ only-vars in parens right after,
+;; A valid expression (maybe not sensical, but grammatically valid!)
+;; right after
+;; And the required closing right paren right after

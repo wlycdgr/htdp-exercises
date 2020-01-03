@@ -1,0 +1,36 @@
+;; The first three lines of this file were inserted by DrRacket. They record metadata
+;; about the language level of this file in a form that our tools can easily process.
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname ex4-2-1) (read-case-sensitive #t) (teachpacks ((lib "convert.rkt" "teachpack" "htdp"))) (htdp-settings #(#t constructor repeating-decimal #f #t none #f ((lib "convert.rkt" "teachpack" "htdp")) #f)))
+;; is-between-3-exclusive-7-inclusive? : number -> boolean
+;; to determine whether a number is between 3 (exclusive) and 7 (inclusive)
+(define (is-between-3-exclusive-7-inclusive? n)
+  (and (< 3 n) (<= n 7)))
+
+;(is-between-3-exclusive-7-inclusive? 2) "should be" false
+;(is-between-3-exclusive-7-inclusive? 3) "should be" false
+;(is-between-3-exclusive-7-inclusive? 4) "should be" true
+;(is-between-3-exclusive-7-inclusive? 7) "should be" true
+;(is-between-3-exclusive-7-inclusive? 9) "should be" false
+
+;; is-between-3-7-inclusive? : number -> boolean
+;; to determine whether a number if between 3 and 7 (inclusive)
+(define (is-between-3-7-inclusive? n)
+  (or (is-between-3-exclusive-7-inclusive? n) (= n 3)))
+
+;(is-between-3-7-inclusive? 2) "should be" false
+;(is-between-3-7-inclusive? 3) "should be" true
+;(is-between-3-7-inclusive? 4) "should be" true
+;(is-between-3-7-inclusive? 7) "should be" true
+;(is-between-3-7-inclusive? 9) "should be" false
+
+;; is-between-3-inclusive-9-exlusive? : number -> boolean
+;; to determine whether a number is between 3 (inclusive) and 9 (exclusive)
+(define (is-between-3-inclusive-9-exclusive? n)
+  (and (<= 3 n) (< n 9)))
+
+;(is-between-3-inclusive-9-exclusive? 1) "should be" false
+;(is-between-3-inclusive-9-exclusive? 3) "should be" true
+;(is-between-3-inclusive-9-exclusive? 5) "should be" true
+;(is-between-3-inclusive-9-exclusive? 9) "should be" false
+;(is-between-3-inclusive-9-exclusive? 10) "should be" false
+

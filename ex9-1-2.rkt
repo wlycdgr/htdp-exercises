@@ -1,0 +1,30 @@
+;; The first three lines of this file were inserted by DrRacket. They record metadata
+;; about the language level of this file in a form that our tools can easily process.
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname ex9-1-2) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
+; 9.1.2.
+; let 1 be the list
+; (cons 10 (cons 20 (cons 5 empty)))
+
+; What are the values of the following expressions?
+
+; 1.
+; (rest 1)
+; -> (cons 20 (cons 5 empty))
+
+; 2.
+; (first (rest 1))
+; -> 20
+
+; 3.
+; (rest (rest 1))
+; -> (cons 5 empty)
+
+; 4.
+; (first (rest (rest 1)))
+;  -> 5
+
+; 5.
+; (rest (rest (rest 1)))
+; -> empty
+
+;; ALL CORRECT!

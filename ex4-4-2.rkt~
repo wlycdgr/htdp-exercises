@@ -1,0 +1,44 @@
+;; The first three lines of this file were inserted by DrRacket. They record metadata
+;; about the language level of this file in a form that our tools can easily process.
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname ex4-4-2) (read-case-sensitive #t) (teachpacks ((lib "convert.rkt" "teachpack" "htdp"))) (htdp-settings #(#t constructor repeating-decimal #f #t none #f ((lib "convert.rkt" "teachpack" "htdp")) #f)))
+;; interest : number -> number
+;; to compute the amount of interest earned in a year for a given deposit amount >= 0
+
+;; data analysis step
+;; there are 3 distinct situations:
+;; a deposit up to $1000
+;; a deposit greater than $1000 but less than or equal to $5000
+;; a deposit of more than $5000
+
+;; examples, covering all borderline cases
+;; amount = 0, should be 0
+;; amount = 500, should be 20
+;; amount = 1000, should be 40
+;; amount = 3000, should be 135
+;; amount = 5000, should be 225
+;; amount = 6000, should be 300
+
+;(define (interest amount)
+;  (cond
+;    [... ...]
+;    [... ...]
+;    [... ...]))
+
+;(define (interest amount)
+;  (cond
+;    [(<= amount 1000) ...]
+;    [(<= amount 5000) ...]
+;    [else ...]))
+
+(define (interest amount)
+  (cond
+    [(<= amount 1000) (* amount 0.040)]
+    [(<= amount 5000) (* amount 0.045)]
+    [else (* amount 0.050)]))
+
+(= (interest 0) 0)
+(= (interest 500) 20)
+(= (interest 1000) 40)
+(= (interest 3000) 135)
+(= (interest 5000) 225)
+(= (interest 6000) 300)

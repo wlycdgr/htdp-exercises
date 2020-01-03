@@ -1,0 +1,16 @@
+;; The first three lines of this file were inserted by DrRacket. They record metadata
+;; about the language level of this file in a form that our tools can easily process.
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname ex6-3-2) (read-case-sensitive #t) (teachpacks ((lib "draw.rkt" "teachpack" "htdp"))) (htdp-settings #(#t constructor repeating-decimal #f #t none #f ((lib "draw.rkt" "teachpack" "htdp")) #f)))
+;; 6-3-1
+;; 1.
+;; make-movie movie-title movie-producer
+;; 2.
+;; make-boyfriend boyfriend-name boyfriend-hair boyfriend-eyes boyfriend-phone
+;; 3.
+;; make-cheerleader cheerleader-name cheerleader-number
+;; 4.
+;; make-CD CD-artist CD-title CD-price
+;; 5.
+;; make-sweater sweater-material sweater-size sweater-producer
+;; also, for each!
+;; struct-name?

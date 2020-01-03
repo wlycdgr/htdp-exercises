@@ -1,0 +1,23 @@
+;; The first three lines of this file were inserted by DrRacket. They record metadata
+;; about the language level of this file in a form that our tools can easily process.
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname ex3-3-6) (read-case-sensitive #t) (teachpacks ((lib "convert.rkt" "teachpack" "htdp"))) (htdp-settings #(#t constructor repeating-decimal #f #t none #f ((lib "convert.rkt" "teachpack" "htdp")) #f)))
+;; height : number number -> number
+;; to compute the height a rocket reaches in time t
+(define (height g t)
+  (height-from-speed t (speed g t)))
+
+;; height-from-speed : number number -> number
+;; to computer the height a rocket reaches after a given time for a given speed
+(define (height-from-speed time speed)
+  (* (/ 1 2) time speed))
+
+;; speed : number number -> number
+;; to compute the speed an object reaches after a given time for a given acceleration
+(define (speed acceleration time)
+  (* acceleration time))
+
+(speed 3 5) "should be" 15
+(height-from-speed 3 5) "should be" (/ 75 2)
+(height 3 5) "should be" (/ 75 2)
+
+

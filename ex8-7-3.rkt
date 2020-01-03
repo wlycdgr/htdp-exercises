@@ -1,0 +1,40 @@
+;; The first three lines of this file were inserted by DrRacket. They record metadata
+;; about the language level of this file in a form that our tools can easily process.
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname ex8-7-3) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
+; 8.7.3. Suppose the Definitions window contains
+(define-struct ball (x y speed-x speed-y))
+
+; Determine the results of the following expressions:
+
+; 1.
+; (number? (make-ball 1 2 3 4))
+; the result should be false. the argument value is of type ball, not number
+(number? (make-ball 1 2 3 4))
+; as expected / correct
+
+; 2.
+; (ball-speed-y (make-ball (+ 1 2) (+ 3 3) 2 3))
+; we select the speed-y component of the ball value, which has been defined to be the 4th component
+; so, the result should be 3
+(ball-speed-y (make-ball (+ 1 2) (+ 3 3) 2 3))
+; as expected / correct
+
+; 3.
+; (ball-y (make-ball (+ 1 2) (+ 3 3) 2 3))
+; we select the y component of the ball value, which has been defined to be the 2nd component
+; so, the result should be the value of (+ 3 3), which is 6
+(ball-y (make-ball (+ 1 2) (+ 3 3) 2 3))
+; as expected / correct
+
+; Scheme spits out an error:
+; make-ball: expects 4 arguments, but found only 3
+; (number? (make-ball 1 3 4))
+
+; Scheme spits out an error:
+; ball-x: expects a ball, given (make-posn 1 2)
+; (ball-x (make-posn 1 2))
+
+; I expect that Scheme will spit out an error
+; complaining that ball-speed-y expects a ball, but was given 5
+; ...this is what happened
+; (ball-speed-y 5)

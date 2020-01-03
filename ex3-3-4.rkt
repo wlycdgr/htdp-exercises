@@ -1,0 +1,43 @@
+;; The first three lines of this file were inserted by DrRacket. They record metadata
+;; about the language level of this file in a form that our tools can easily process.
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname ex3-3-4) (read-case-sensitive #t) (teachpacks ((lib "convert.rkt" "teachpack" "htdp"))) (htdp-settings #(#t constructor repeating-decimal #f #t none #f ((lib "convert.rkt" "teachpack" "htdp")) #f)))
+(define PI 3.15)
+
+;; area-pipe : number number number -> number
+;; to compute the surface area of a pipe given its length, thickness, and inner radius
+(define (area-pipe inner-radius length thickness)
+  (+
+   (* 2 (area-ring (+ inner-radius thickness) inner-radius))
+   (* length (circumference-disk inner-radius))
+   (* length (circumference-disk (+ inner-radius thickness)))))
+
+;; area-ring : number number -> number
+;; to compute the area of a ring given its outer and inner radii
+(define (area-ring outer-radius inner-radius)
+  (- (area-disk outer-radius) (area-disk inner-radius)))
+
+;; area-disk : number -> number
+;; to compute the area of a disk given its radius
+(define (area-disk radius)
+  (* PI (sqr radius)))
+
+;; circumference-disk : number -> number
+;; to computer the circumference of a disk given its radius
+(define (circumference-disk radius)
+  (* 2 PI radius))
+
+(circumference-disk 3) "should be" (* 6 PI)
+(area-disk 4) "should be" (* 16 PI)
+(area-ring 4 3) "should be" (* 7 PI)
+(area-pipe 3 5 1) "should be" (* 84 PI)
+
+;; DO NOT DO THIS - BAD PRACTICE
+;; area-pipe-inline : number number number -> number
+;; to compute the surface area of a pipe given its length, thickness, and inner radius
+(define (area-pipe-inline inner-radius length thickness)
+  (+
+   (* 2 (- (* PI (sqr (+ inner-radius thickness))) (* PI (sqr inner-radius))))
+   (* length (* 2 PI inner-radius))
+   (* length (* 2 PI (+ inner-radius thickness)))))
+
+(area-pipe-inline 3 5 1) "should be" (* 84 PI)

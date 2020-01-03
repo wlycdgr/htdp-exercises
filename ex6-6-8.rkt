@@ -1,0 +1,34 @@
+;; The first three lines of this file were inserted by DrRacket. They record metadata
+;; about the language level of this file in a form that our tools can easily process.
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname ex6-6-8) (read-case-sensitive #t) (teachpacks ((lib "draw.rkt" "teachpack" "htdp"))) (htdp-settings #(#t constructor repeating-decimal #f #t none #f ((lib "draw.rkt" "teachpack" "htdp")) #f)))
+;; 6.6.7
+
+(define-struct rectangle (ul w h c))
+;; a rectangle is a structure:
+;;    (make-rectangle ul w h c)
+;; where ul is a posn that represents the rectangle's upper left corner
+;; w and h are numbers that represent the width and height of the rectangle,
+;; and c is a color
+
+;; let's develop a Template
+;; fun-for-rect : rectangle -> ???
+;(define (fun-for-rect a-rectangle)
+;  ... (rectangle-ul a-rectangle) ...
+;  ... (rectangle-w a-rectangle) ...
+;  ... (rectangle-h a-rectangle) ...
+;  ... (rectangle-c a-rectangle) ...)
+
+;; 6.6.8
+;; let's use the template to develop draw-a-rectangle
+
+(define (draw-a-rectangle a-rectangle)
+  (draw-solid-rect
+   (rectangle-ul a-rectangle)
+   (rectangle-w a-rectangle)
+   (rectangle-h a-rectangle)
+   (rectangle-c a-rectangle)))
+
+;; and let's test it
+(start 300 300)
+(define example-rect-1 (make-rectangle (make-posn 100 100) 100 25 'orange))
+(draw-a-rectangle example-rect-1)

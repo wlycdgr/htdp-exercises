@@ -1,0 +1,23 @@
+;; The first three lines of this file were inserted by DrRacket. They record metadata
+;; about the language level of this file in a form that our tools can easily process.
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname ex5-1-1) (read-case-sensitive #t) (teachpacks ((lib "convert.rkt" "teachpack" "htdp"))) (htdp-settings #(#t constructor repeating-decimal #f #t none #f ((lib "convert.rkt" "teachpack" "htdp")) #f)))
+(define (reply s)
+  (cond
+    [(symbol=? s 'GoodMorning) 'Hi]
+    [(symbol=? s 'HowAreYou?) 'Fine]
+    [(symbol=? s 'GoodAfternoon) 'INeedANap]
+    [(symbol=? s 'GoodEvening) 'BoyAmITired]))
+
+;; (reply 'HowAreYou?)
+;; 1, s replaced by 'HowAreYou?
+;; 2, 1st condition evaluates to false
+;; 3, 2nd condition evaluates to true
+;; 4, 2nd condition answer ('Fine) is returned
+
+(reply 'HowAreYou?)
+
+;; examples as tests
+(symbol=? (reply 'GoodMorning) 'Hi)
+(symbol=? (reply 'HowAreYou?) 'Fine)
+(symbol=? (reply 'GoodAfternoon) 'INeedANap)
+(symbol=? (reply 'GoodEvening) 'BoyAmITired)

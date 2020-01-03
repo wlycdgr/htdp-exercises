@@ -1,0 +1,93 @@
+;; The first three lines of this file were inserted by DrRacket. They record metadata
+;; about the language level of this file in a form that our tools can easily process.
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname ex4-2-1) (read-case-sensitive #t) (teachpacks ((lib "convert.rkt" "teachpack" "htdp"))) (htdp-settings #(#t constructor repeating-decimal #f #t none #f ((lib "convert.rkt" "teachpack" "htdp")) #f)))
+;; 1
+;; is-between-3-exclusive-7-inclusive? : number -> boolean
+;; to determine whether a number is between 3 (exclusive) and 7 (inclusive)
+(define (is-between-3-exclusive-7-inclusive? n)
+  (and (< 3 n) (<= n 7)))
+
+;(is-between-3-exclusive-7-inclusive? 2) "should be" false
+;(is-between-3-exclusive-7-inclusive? 3) "should be" false
+;(is-between-3-exclusive-7-inclusive? 4) "should be" true
+;(is-between-3-exclusive-7-inclusive? 7) "should be" true
+;(is-between-3-exclusive-7-inclusive? 9) "should be" false
+
+
+;; 2
+;; is-between-3-7-inclusive? : number -> boolean
+;; to determine whether a number if between 3 and 7 (inclusive)
+(define (is-between-3-7-inclusive? n)
+  (or (is-between-3-exclusive-7-inclusive? n) (= n 3)))
+
+;(is-between-3-7-inclusive? 2) "should be" false
+;(is-between-3-7-inclusive? 3) "should be" true
+;(is-between-3-7-inclusive? 4) "should be" true
+;(is-between-3-7-inclusive? 7) "should be" true
+;(is-between-3-7-inclusive? 9) "should be" false
+
+
+;; 3
+;; is-between-3-inclusive-9-exlusive? : number -> boolean
+;; to determine whether a number is between 3 (inclusive) and 9 (exclusive)
+(define (is-between-3-inclusive-9-exclusive? n)
+  (and (<= 3 n) (< n 9)))
+
+;(is-between-3-inclusive-9-exclusive? 1) "should be" false
+;(is-between-3-inclusive-9-exclusive? 3) "should be" true
+;(is-between-3-inclusive-9-exclusive? 5) "should be" true
+;(is-between-3-inclusive-9-exclusive? 9) "should be" false
+;(is-between-3-inclusive-9-exclusive? 10) "should be" false
+
+
+;; 4
+;; is-between-1-3-exlusive? : number -> boolean
+;; to determine whether a number is between 1 and 3 (exclusive)
+(define (is-between-1-3-exclusive? n)
+  (and (< 1 n) (< n 3)))
+
+;(is-between-1-3-exclusive? 0) "should be" false
+;(is-between-1-3-exclusive? 1) "should be" false
+;(is-between-1-3-exclusive? 2) "should be" true
+;(is-between-1-3-exclusive? 3) "should be" false
+;(is-between-1-3-exclusive? 4) "should be" false
+
+;; is-between-9-11-exclusive? : number -> boolean
+;; to determine whether a number is between 9 and 11 (exclusive)
+(define (is-between-9-11-exclusive? n)
+  (and (< 9 n) (< n 11)))
+
+;(is-between-9-11-exclusive? 8) "should be" false
+;(is-between-9-11-exclusive? 9) "should be" false
+;(is-between-9-11-exclusive? 10) "should be" true
+;(is-between-9-11-exclusive? 11) "should be" false
+;(is-between-9-11-exclusive? 12) "should be" false
+
+;; is-in-union-of-1-3-exclusive-and-9-11-exclusive? : number -> boolean
+;; to determine whether a number is between 1 and 3 (exclusive) or 9 and 11 (also exclusive)
+(define (is-in-union-of-1-3-exclusive-and-9-11-exclusive? n)
+  (or (is-between-1-3-exclusive? n) (is-between-9-11-exclusive? n)))
+
+;(is-in-union-of-1-3-exclusive-and-9-11-exclusive? 0) "should be" false
+;(is-in-union-of-1-3-exclusive-and-9-11-exclusive? 1) "should be" false
+;(is-in-union-of-1-3-exclusive-and-9-11-exclusive? 2) "should be" true
+;(is-in-union-of-1-3-exclusive-and-9-11-exclusive? 3) "should be" false
+;(is-in-union-of-1-3-exclusive-and-9-11-exclusive? 5) "should be" false
+;(is-in-union-of-1-3-exclusive-and-9-11-exclusive? 9) "should be" false
+;(is-in-union-of-1-3-exclusive-and-9-11-exclusive? 10) "should be" true
+;(is-in-union-of-1-3-exclusive-and-9-11-exclusive? 11) "should be" false
+;(is-in-union-of-1-3-exclusive-and-9-11-exclusive? 12) "should be" false
+
+
+;; 5
+;; is-not-in-1-3-inclusive? : number -> boolean
+;; to determine whether a number is not in the range 1 to 3 inclusive
+(define (is-not-in-1-3-inclusive? n)
+  (not (or (= 1 n) (is-between-1-3-exclusive? n) (= 3 n))))
+
+(is-not-in-1-3-inclusive? 0) "should be" true
+(is-not-in-1-3-inclusive? 1) "should be" false
+(is-not-in-1-3-inclusive? 2) "should be" false
+(is-not-in-1-3-inclusive? 3) "should be" false
+(is-not-in-1-3-inclusive? 4) "should be" true
+

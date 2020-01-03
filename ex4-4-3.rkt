@@ -1,0 +1,67 @@
+;; The first three lines of this file were inserted by DrRacket. They record metadata
+;; about the language level of this file in a form that our tools can easily process.
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname ex4-4-3) (read-case-sensitive #t) (teachpacks ((lib "convert.rkt" "teachpack" "htdp"))) (htdp-settings #(#t constructor repeating-decimal #f #t none #f ((lib "convert.rkt" "teachpack" "htdp")) #f)))
+;; determininig the pay-back for a customer who charged $2000 by hand
+;; 0.25% of $500 + 0.50% of $1000 + 0.75% of the last $500
+;; = $1.25 + $5 + $3.75 = $10
+
+;; deteremining by hand the pay-back for a $2600 customer
+;; 0.25% of $500 + 0.50% of $1000 + 0.75% of $1000 + 1.0% of $100
+;; = $1.25 + $5 + $7.50 + $1 = $14.75
+
+;; pay-back : number -> number
+;; to determine the pay-back amount given a charge amount
+
+;; data analysis
+;; we have 4 distinct cases:
+;; $500 and under
+;; over $500 to $1500
+;; over $1500 to $2500
+;; over $2500
+
+;; examples:
+;; $0 -> $0 // boundary
+;; $300 -> $0.75
+;; $500 -> $1.25 // boundary
+;; $800 -> $1.25 + $1.50 = $2.75
+;; $1500 -> $1.25 + $5 = $6.25 // boundary
+;; $2000 -> $1.25 + $5 + $3.75 = $10
+;; $2500 -> $1.25 + $5 + $7.50 = $13.75 // boundary
+;; $3000 -> $1.25 + $5 + $7.50 + $5 = $18.75
+
+;; draft definition with structure only
+;(define (pay-back amount)
+;  (cond
+;    [... ...]
+;    [... ...]
+;    [... ...]
+;    [... ...]))
+
+;; draft definition with conditions
+;(define (pay-back amount)
+;  (cond
+;    [(> amount 2500) ...]
+;    [(> amount 1500) ...]
+;    [(> amount 500) ...]
+;    [else ...]))
+
+;; draft definition with answers
+(define (pay-back amount)
+  (cond
+    [(> amount 2500) (+ 13.75 (* (- amount 2500) 0.01))]
+    [(> amount 1500) (+ 6.25 (* (- amount 1500) 0.0075))]
+    [(> amount 500) (+ 1.25 (* (- amount 500) 0.005))]
+    [else (* amount 0.0025)]))
+
+;; examples converted to tests
+(= (pay-back 0) 0)
+(= (pay-back 300) 0.75)
+(= (pay-back 500) 1.25)
+(= (pay-back 800) 2.75)
+(= (pay-back 1500) 6.25)
+(= (pay-back 2000) 10)
+(= (pay-back 2500) 13.75)
+(= (pay-back 3000) 18.75)
+  
+
+

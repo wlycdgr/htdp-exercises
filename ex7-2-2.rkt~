@@ -1,0 +1,58 @@
+;; The first three lines of this file were inserted by DrRacket. They record metadata
+;; about the language level of this file in a form that our tools can easily process.
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname ex7-2-2) (read-case-sensitive #t) (teachpacks ((lib "hangman.rkt" "teachpack" "htdp"))) (htdp-settings #(#t constructor repeating-decimal #f #t none #f ((lib "hangman.rkt" "teachpack" "htdp")) #f)))
+;; 7.2.1
+
+(define-struct spider (remaining-legs space-needed))
+(define-struct elephant (space-needed))
+(define-struct monkey (iq space-needed))
+
+;; A zoo-animal is:
+;;   a spider struct (make-spider remaining-legs space-needed)
+;;     where remaining-legs is a number and
+;;     space-needed is a number representing needed cage volume
+;;   OR
+;;   an elephan struct (make-elephant space-needed)
+;;     where space-needed is a number
+;;   OR
+;;   a monkey struct (make-monkey iq space-needed)
+;;     where iq is a number that is a flawed, limited, but reasonable approximation
+;;     or the monkey's intelligence
+;;     and space-needed is a number
+
+;; EXAMPLES: see tests
+
+;; TEMPLATE
+;; zoo-animal-consumer : zoo-animal -> ?
+;(define (zoo-animal-consumer a-zoo-animal)
+;  (cond
+;    [(spider? a-zoo-animal)
+;     ... (spider-remaining-legs a-zoo-animal) ... (spider-space-needed a-zoo-animal) ...]
+;    [(elephant? a-zoo-animal)
+;     ... (elephant-space-needed a-zoo-animal) ...]
+;    [(monkey? a-zoo-animal)
+;     ... (monkey-iq a-zoo-animal) ... (monkey-space-needed a-zoo-animal)]))
+
+;; here's a simpler template that compiles
+(define (zoo-animal-consumer a-zoo-animal)
+  (cond
+    [(spider? a-zoo-animal) ...]
+    [(elephant? a-zoo-animal) ...]
+    [(monkey? a-zoo-animal) ...]))
+
+(define (fits? a-zoo-animal cage-volume)
+  (cond
+    [(spider? a-zoo-animal) (>= cage-volume (spider-space-needed a-zoo-animal))]
+    [(elephant? a-zoo-animal) (>= cage-volume (elephant-space-needed a-zoo-animal))]
+    [(monkey? a-zoo-animal) (>= cage-volume (monkey-space-needed a-zoo-animal))]))
+
+(define test-spider (make-spider 7 4))
+(define test-elephant (make-elephant 135000))
+(define test-monkey (make-monkey 125 1200))
+
+;; to really test, we would do over, under, and equal for each type of animal
+;; but let's not go crazy for this school exercise
+
+(fits? test-spider 8)
+(fits? test-elephant 345000)
+(not (fits? test-monkey 900))
