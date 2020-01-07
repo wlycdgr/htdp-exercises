@@ -1,0 +1,32 @@
+;; The first three lines of this file were inserted by DrRacket. They record metadata
+;; about the language level of this file in a form that our tools can easily process.
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname ex9-5-3) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
+; 9.5.3.
+; develop the function dollar-store? which
+; consumes a list of prices and returns true if all are below $1
+
+; contract
+; dollar-store : list-of-numbers -> boolean
+
+; purpose
+; to determine whether each number in a list of numbers
+; that represent prices in dollars is below 1
+
+; definition
+(define (dollar-store? lon)
+  (cond
+    [(empty? lon) true]
+    [else (and (< (first lon) 1)
+               (dollar-store? (rest lon)))]))
+
+; tests
+(dollar-store? empty)
+(not (dollar-store? (cons .75 (cons 1.95 (cons .25 empty)))))
+(dollar-store? (cons .15 (cons .05 (cons .25 empty))))
+
+; generalize the function
+(define (x-store? lon x)
+  (cond
+    [(empty? lon) true]
+    [else (and (< (first lon) x)
+               (x-store? (rest lon) x))]))

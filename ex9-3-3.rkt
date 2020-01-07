@@ -1,0 +1,30 @@
+;; The first three lines of this file were inserted by DrRacket. They record metadata
+;; about the language level of this file in a form that our tools can easily process.
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname ex9-3-3) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
+; 9.3.3
+; Develop the function contains?, which consumes a symbol and a los
+; and determines whether or not the symbol occurs in the los
+
+; contract
+; contains? : los symbol -> boolean
+
+; purpose
+; to determine whether a symbol is present in a list of symbols
+
+; definition
+(define (contains? los symbol)
+  (cond
+    [(empty? los) false]
+    [else (or (eq? (first los) symbol)
+              (contains? (rest los) symbol))]))
+
+(define fruit (cons 'apple (cons 'mango (cons 'pear empty))))
+(not (contains? empty 'banana))
+(not (contains? fruit 'banana))
+(contains? fruit 'apple)
+(contains? fruit 'mango)
+(contains? fruit 'pear)
+
+          
+              
+                     
