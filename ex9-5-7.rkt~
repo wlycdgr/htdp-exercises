@@ -1,0 +1,32 @@
+;; The first three lines of this file were inserted by DrRacket. They record metadata
+;; about the language level of this file in a form that our tools can easily process.
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname ex9-5-7) (read-case-sensitive #t) (teachpacks ((lib "guess.rkt" "teachpack" "htdp"))) (htdp-settings #(#t constructor repeating-decimal #f #t none #f ((lib "guess.rkt" "teachpack" "htdp")) #f)))
+; 9.5.6.
+; develop the function delta,
+; which consumes two price lists (that is, lists of numbers)
+; the first represents the inventory at the beginning of a time period
+; the second represents the inventory at the end
+; the function outputs the difference in value (positive if it has increased, negative if it has decreased)
+
+; contract
+; delta : lon lon -> number
+
+; purpose
+; to calculate the difference between the total values of an inventory at two points in time
+
+; definition
+(define (delta lon-start lon-end)
+  (- (sum lon-end) (sum lon-start)))
+
+; helper that sums the values in a list of numbers
+(define (sum lon)
+  (cond
+    [(empty? lon) 0]
+    [else (+ (first lon) (sum (rest lon)))]))
+
+; tests
+(define l1 (cons 5 (cons 12 (cons 4 empty))))
+(define l2 (cons 11 (cons 7 empty)))
+
+(= 3 (delta l2 l1))
+(= -3 (delta l1 l2))
