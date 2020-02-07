@@ -1,0 +1,56 @@
+;; The first three lines of this file were inserted by DrRacket. They record metadata
+;; about the language level of this file in a form that our tools can easily process.
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname ex10-1-6) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
+; 10.1.6
+; develop name-robot
+
+; name-robot : list-of-symbols -> list-of-symbols
+; produce a list of more accurate descriptions from a list of toy description symbols
+; specifically, replace all occurrences of 'robot with 'r2d2
+
+; template basically same as for functions that consume lists of numbers
+; symbols are just another type of simple (vs compound/mixed) data
+
+; example
+; (define cool-toys (cons 'robot (cons 'legos (cons 'buckyballs (cons 'robot empty)))))
+; (name-robot cool-toys) should return
+; (cons 'r2d2 (cons 'legos (cons 'buckyballs (cons 'r2d2 empty))))
+
+; let's define!
+(define (name-robot list-of-toys)
+  (cond
+    [(empty? list-of-toys) empty]
+    [else (cons
+           (cond
+             [(symbol=? 'robot (first list-of-toys)) 'r2d2]
+             [else (first list-of-toys)])
+           (name-robot (rest list-of-toys)))]))
+
+; cool, now let's test
+(define cool-toys (cons 'robot (cons 'legos (cons 'buckyballs (cons 'robot empty)))))
+(name-robot cool-toys)
+
+; part 2
+; generalize name-robot to substitute
+
+; substitute : list-of-symbols old new -> list-of-symbols
+; to replace all occurences of [old] in a list with [new]
+; (define (substitute los old new) ... )
+
+; example
+; (define foods (cons 'banana (cons 'egg (cons 'chickpeas (cons 'banana empty)))))
+; (substitute foods 'banana 'cherry) should return
+; (cons 'cherry (cons 'egg (cons 'chickpeas (cons 'cherry empty))))
+
+(define (substitute los old new)
+  (cond
+    [(empty? los) empty]
+    [else (cons
+           (cond
+             [(symbol=? (first los) old) new]
+             [else (first los)])
+           (substitute (rest los) old new))]))
+
+; test
+(define foods (cons 'banana (cons 'egg (cons 'chickpeas (cons 'banana empty)))))
+(substitute foods 'banana 'cherry)

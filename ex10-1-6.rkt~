@@ -1,0 +1,31 @@
+;; The first three lines of this file were inserted by DrRacket. They record metadata
+;; about the language level of this file in a form that our tools can easily process.
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname ex10-1-6) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
+; 10.1.5
+; develop eliminate-exp
+
+; eliminate-exp : list-of-numbers upper-bound -> list-of-numbers
+; filter a list of numbers by dropping any value over a specified upper bound
+; and return the filtered list
+; (define (eliminate-exp list-of-numbers upper-bound) ...)
+
+; example:
+; (define snack-prices (cons 2 (cons 3.25 (cons 9 (cons 1 empty)))))
+; (eliminate-exp snack-prices 3.25) should return
+; (cons 2 (cons 3.25 (cons 1 empty)))
+
+; same data definition, same template
+
+; let's define the function
+(define (eliminate-exp list-of-numbers upper-bound)
+  (cond
+    [(empty? list-of-numbers) empty]
+    [else (cond
+            [(> (first list-of-numbers) upper-bound) (eliminate-exp (rest list-of-numbers) upper-bound)]
+            [else (cons
+                   (first list-of-numbers)
+                   (eliminate-exp (rest list-of-numbers) upper-bound))])]))
+
+; now let's test
+(define snack-prices (cons 2 (cons 3.25 (cons 9 (cons 1 empty)))))
+(eliminate-exp snack-prices 3.25)
